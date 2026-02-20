@@ -529,7 +529,7 @@ const App = () => {
                                 className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-[30px] shadow-[0_20px_40px_rgba(37,99,235,0.2)] transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-4 group"
                             >
                                 <span className="uppercase tracking-[0.2em] text-sm">
-                                    {isLoginMode ? 'Signin' : 'Signin'}
+                                    {isLoginMode ? 'Log In' : 'Sign Up'}
                                 </span>
                                 <ChevronRight size={20} className="group-hover:translate-x-1 transition-all" />
                             </button>
@@ -541,7 +541,7 @@ const App = () => {
                             onClick={() => setIsLoginMode(!isLoginMode)}
                             className="text-[10px] font-black text-slate-400 hover:text-blue-500 transition-all uppercase tracking-[0.4em] decoration-blue-500/50 underline-offset-8 decoration-2 hover:underline"
                         >
-                            {isLoginMode ? "Login →" : "Loging →"}
+                            {isLoginMode ? "Sign Up →" : "Login →"}
                         </button>
                     </div>
                 </div>
