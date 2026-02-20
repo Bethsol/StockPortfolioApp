@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, onSnapshot, addDoc, query, orderBy, serverTimestamp } from 'firebase/firestore';
-import { LayoutDashboard, PieChart as PieIcon, List, Search, BookOpen, LogOut, TrendingUp, RefreshCw, Menu, X, Bell, User, Activity, ChevronRight, ChevronDown, Sun, Moon, Shield } from 'lucide-react';
+import { LayoutDashboard, PieChart as PieIcon, List, Search, BookOpen, LogOut, TrendingUp, RefreshCw, X, Bell, Activity, ChevronRight, Sun, Moon, Shield } from 'lucide-react';
 
 // Relative imports
 import { MarketDataService, Stock, StockAggregator } from './services';
@@ -14,7 +14,7 @@ import Market from './pages/Market';
 import Education from './pages/Education';
 import StockDetail from './pages/StockDetail';
 import Watchlist from './pages/Watchlist';
-import Settings from './pages/Settings';
+// import Settings from './pages/Settings';
 import GlobalNews from './pages/GlobalNews';
 
 // Main App Component

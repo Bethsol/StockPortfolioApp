@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Newspaper, TrendingUp, Clock, ExternalLink, Globe, Search, RefreshCw, BarChart2 } from 'lucide-react';
+import { Newspaper, TrendingUp, Clock, ExternalLink, Globe, Search, BarChart2 } from 'lucide-react';
 
 const GlobalNews = () => {
     const [news, setNews] = useState([]);

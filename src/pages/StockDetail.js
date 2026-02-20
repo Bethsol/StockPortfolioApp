@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { TrendingUp, TrendingDown, Clock, Newspaper, ArrowLeft, Plus, DollarSign, Activity, BarChart3, Globe, ShoppingCart } from 'lucide-react';
+import { TrendingUp, TrendingDown, Clock, Newspaper, ArrowLeft, DollarSign, Activity, BarChart3, Globe, ShoppingCart } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const StockDetail = ({ marketDataService, addOrUpdateStock, sellSelectedStock }) => {
