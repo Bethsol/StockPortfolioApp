@@ -477,7 +477,7 @@ const App = () => {
                     </h1>
 
                     <p className="text-slate-400 text-lg font-medium leading-relaxed mb-12">
-                        Welcome to the next generation of quantitative asset management. Our engine synchronizes millions of global vectors in real-time.
+                        Welcome to the next generation of quantitative asset management.
                     </p>
 
                     <div className="mt-auto flex items-center gap-10">
@@ -487,7 +487,7 @@ const App = () => {
                         </div>
                         <div className="h-10 w-px bg-white/10" />
                         <div className="flex flex-col">
-                            <span className="text-2xl font-black text-blue-500 tracking-tighter">v4.0.0</span>
+
                             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-1">Engine Version</span>
                         </div>
                     </div>
@@ -529,7 +529,7 @@ const App = () => {
                                 className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-[30px] shadow-[0_20px_40px_rgba(37,99,235,0.2)] transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-4 group"
                             >
                                 <span className="uppercase tracking-[0.2em] text-sm">
-                                    {isLoginMode ? 'LOGIN' : 'Generate Identity'}
+                                    {isLoginMode ? 'Signin' : 'Signin'}
                                 </span>
                                 <ChevronRight size={20} className="group-hover:translate-x-1 transition-all" />
                             </button>
@@ -541,7 +541,7 @@ const App = () => {
                             onClick={() => setIsLoginMode(!isLoginMode)}
                             className="text-[10px] font-black text-slate-400 hover:text-blue-500 transition-all uppercase tracking-[0.4em] decoration-blue-500/50 underline-offset-8 decoration-2 hover:underline"
                         >
-                            {isLoginMode ? "SIGNUP →" : "Access Existing Node →"}
+                            {isLoginMode ? "Login →" : "Loging →"}
                         </button>
                     </div>
                 </div>
