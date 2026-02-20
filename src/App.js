@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, onSnapshot, addDoc, query, orderBy, serverTimestamp } from 'firebase/firestore';
-import { LayoutDashboard, PieChart as PieIcon, List, Search, BookOpen, LogOut, TrendingUp, RefreshCw, X, Bell, Activity, ChevronRight, Sun, Moon, Shield } from 'lucide-react';
+import { LayoutDashboard, PieChart as PieIcon, List, Search, BookOpen, LogOut, TrendingUp, RefreshCw, Menu, X, Bell, Activity, ChevronRight, Sun, Moon, Shield } from 'lucide-react';
 
 // Relative imports
 import { MarketDataService, Stock, StockAggregator } from './services';
@@ -270,6 +270,7 @@ const App = () => {
     const Navigation = () => {
         const loc = useLocation();
         const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+        const [showMobileMenu, setShowMobileMenu] = useState(false);
 
         const navItems = [
             { path: '/', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
@@ -283,7 +284,7 @@ const App = () => {
         return (
             <nav className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors duration-300">
                 {/* Branding Bar (3D Shiny Metallic) */}
-                <div className="relative py-4 text-right overflow-hidden bg-slate-900 border-b border-white/10 group">
+                <div className="relative py-3 md:py-4 px-6 text-right overflow-hidden bg-slate-900 border-b border-white/10 group">
                     {/* 3D Shiny Animation Layer */}
                     <div className="absolute inset-0 z-0 opacity-40">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg] animate-shine" />
@@ -291,33 +292,36 @@ const App = () => {
                     {/* Depth Gradient */}
                     <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
 
-                    <div className="relative z-10 flex flex-col items-right justify-right">
-                        <span className="text-[9px] font-black text-blue-400 uppercase tracking-[0.6em] block mb-1 opacity-80">Quantum Ecosystem</span>
-                        <div className="flex items-right gap-3">
-                            <div className="p-1.5 bg-blue-600 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] border border-blue-400/30">
-                                <TrendingUp size={20} className="text-white" />
+                    <div className="relative z-10 flex flex-row md:flex-col items-center md:items-end justify-between md:justify-end gap-3">
+                        <div className="flex flex-col items-start md:items-end order-2 md:order-1">
+                            <span className="text-[7px] md:text-[9px] font-black text-blue-400 uppercase tracking-[0.4em] md:tracking-[0.6em] block mb-0.5 md:mb-1 opacity-80">Quantum Ecosystem</span>
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="p-1 md:p-1.5 bg-blue-600 rounded-lg shadow-[0_0_15px_rgba(37,99,235,0.4)] border border-blue-400/30">
+                                    <TrendingUp size={14} className="text-white md:hidden" />
+                                    <TrendingUp size={18} className="text-white hidden md:block" />
+                                </div>
+                                <h1 className="text-lg md:text-2xl font-black text-white tracking-[0.1em] md:tracking-[0.2em] italic bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                    Stock-Verse
+                                </h1>
                             </div>
-                            <h1 className="text-2xl font-black text-white tracking-[0.2em] italic bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                                Stock-Verse
-                            </h1>
                         </div>
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-6">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+                    <div className="flex items-center gap-3 md:gap-6">
                         {/* Profile Dropdown (FIRST) */}
                         <div className="relative">
                             <button
                                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                                className="flex items-center gap-3 px-4 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-2xl transition-all border border-slate-100 dark:border-slate-700 group"
+                                className="flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 md:py-2 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl md:rounded-2xl transition-all border border-slate-100 dark:border-slate-700 group"
                             >
-                                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xs font-black">
+                                <div className="w-7 h-7 md:w-8 md:h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-[10px] md:text-xs font-black">
                                     {userEmail.charAt(0).toUpperCase()}
                                 </div>
-                                <div className="text-left hidden lg:block">
-                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none text-[8px]">Session</div>
-                                    <div className="text-sm font-bold text-slate-900 dark:text-white leading-tight truncate max-w-[100px]">{userEmail}</div>
+                                <div className="text-left hidden sm:block">
+                                    <div className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none">Session</div>
+                                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white leading-tight truncate max-w-[80px] md:max-w-[100px]">{userEmail}</div>
                                 </div>
                             </button>
 
@@ -393,7 +397,7 @@ const App = () => {
                         <div className="h-8 w-px bg-slate-100 dark:bg-slate-800"></div>
 
                         {/* Desktop Navigation Items */}
-                        <div className="hidden md:flex items-center gap-1">
+                        <div className="hidden lg:flex items-center gap-1">
                             {navItems.map(item => (
                                 <Link
                                     key={item.path}
@@ -406,13 +410,46 @@ const App = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        <button className="p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-slate-400 hover:text-blue-600 transition-all relative">
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <button className="hidden sm:block p-2 md:p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-slate-400 hover:text-blue-600 transition-all relative">
                             <Bell size={20} />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full border-2 border-white dark:border-slate-900"></span>
                         </button>
+
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setShowMobileMenu(!showMobileMenu)}
+                            className="lg:hidden p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300"
+                        >
+                            {showMobileMenu ? <X size={20} /> : <Menu size={20} />}
+                        </button>
                     </div>
                 </div>
+
+                {/* Mobile Navigation Menu */}
+                {showMobileMenu && (
+                    <div className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 space-y-2 animate-fade-in absolute w-full left-0 shadow-xl overflow-y-auto max-h-[calc(100vh-140px)] z-40">
+                        {navItems.map(item => (
+                            <Link
+                                key={item.path}
+                                to={item.path}
+                                onClick={() => setShowMobileMenu(false)}
+                                className={`w-full px-5 py-4 rounded-2xl text-base font-bold transition-all flex items-center gap-4 ${loc.pathname === item.path ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
+                            >
+                                <span className={`${loc.pathname === item.path ? 'text-white' : 'text-blue-500'}`}>{item.icon}</span>
+                                {item.label}
+                            </Link>
+                        ))}
+                        <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                onClick={() => { handleLogout(); setShowMobileMenu(false); }}
+                                className="w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-red-500 font-black transition-all text-base uppercase tracking-widest"
+                            >
+                                <LogOut size={20} /> LogOut
+                            </button>
+                        </div>
+                    </div>
+                )}
             </nav>
         );
     };
@@ -465,18 +502,18 @@ const App = () => {
                         <Activity size={14} /> Intelligence Core Active
                     </div>
 
-                    <div className="flex items-center gap-4 mb-8">
-                        <div className="p-4 bg-blue-600 rounded-[32px] shadow-[0_0_40px_rgba(37,99,235,0.3)]">
-                            <TrendingUp size={48} className="text-white" />
+                    <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                        <div className="p-3 sm:p-4 bg-blue-600 rounded-2xl sm:rounded-[32px] shadow-[0_0_40px_rgba(37,99,235,0.3)]">
+                            <TrendingUp size={32} className="text-white sm:w-12 sm:h-12" />
                         </div>
-                        <h2 className="text-5xl font-black text-white tracking-widest uppercase italic">Stock-Verse</h2>
+                        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase italic">Stock-Verse</h2>
                     </div>
 
-                    <h1 className="text-6xl font-black text-white mb-8 leading-[0.9] tracking-tighter">
+                    <h1 className="text-4xl sm:text-6xl font-black text-white mb-6 sm:mb-8 leading-[1.1] sm:leading-[0.9] tracking-tighter">
                         Master the <br /> <span className="text-blue-500">Multi-Verse.</span>
                     </h1>
 
-                    <p className="text-slate-400 text-lg font-medium leading-relaxed mb-12">
+                    <p className="text-slate-400 text-base sm:text-lg font-medium leading-relaxed mb-8 sm:mb-12">
                         Welcome to the next generation of quantitative asset management.
                     </p>
 
@@ -494,52 +531,52 @@ const App = () => {
                 </div>
 
                 {/* Form / Terminal Interaction Side */}
-                <div className="p-10 lg:p-16 flex flex-col justify-center">
-                    <div className="mb-10 text-center lg:text-left">
-                        <h3 className="text-3xl font-black text-white mb-3">Initialize Identity</h3>
-                        <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em]">Secure Session Protocol Required</p>
+                <div className="p-6 sm:p-10 lg:p-16 flex flex-col justify-center">
+                    <div className="mb-8 sm:mb-10 text-center lg:text-left">
+                        <h3 className="text-2xl sm:text-3xl font-black text-white mb-2 sm:mb-3">Initialize Identity</h3>
+                        <p className="text-slate-400 font-bold uppercase text-[9px] sm:text-[10px] tracking-[0.2em]">Secure Session Protocol Required</p>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                         <div className="group space-y-2">
-                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-blue-500 transition-colors">Credential Email</label>
+                            <label className="text-[9px] sm:text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-blue-500 transition-colors">Credential Email</label>
                             <input
                                 type="email"
                                 value={loginEmail}
                                 onChange={e => setLoginEmail(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 rounded-[30px] px-8 py-6 outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/10 font-bold text-white text-lg transition-all placeholder:text-slate-600"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl sm:rounded-[30px] px-6 sm:px-8 py-4 sm:py-6 outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/10 font-bold text-white text-base sm:text-lg transition-all placeholder:text-slate-600"
                                 placeholder="name@quantum-verse.com"
                             />
                         </div>
 
                         <div className="group space-y-2">
-                            <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-blue-500 transition-colors">Access Passkey</label>
+                            <label className="text-[9px] sm:text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-blue-500 transition-colors">Access Passkey</label>
                             <input
                                 type="password"
                                 value={loginPassword}
                                 onChange={e => setLoginPassword(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 rounded-[30px] px-8 py-6 outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/10 font-bold text-white text-lg transition-all placeholder:text-slate-600"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl sm:rounded-[30px] px-6 sm:px-8 py-4 sm:py-6 outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/10 font-bold text-white text-base sm:text-lg transition-all placeholder:text-slate-600"
                                 placeholder="••••••••"
                             />
                         </div>
 
-                        <div className="pt-6">
+                        <div className="pt-4 sm:pt-6">
                             <button
                                 onClick={handleAuthAction}
-                                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-6 rounded-[30px] shadow-[0_20px_40px_rgba(37,99,235,0.2)] transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-4 group"
+                                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 sm:py-6 rounded-2xl sm:rounded-[30px] shadow-[0_20px_40px_rgba(37,99,235,0.2)] transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-4 group"
                             >
-                                <span className="uppercase tracking-[0.2em] text-sm">
+                                <span className="uppercase tracking-[0.2em] text-xs sm:text-sm">
                                     {isLoginMode ? 'Log In' : 'Sign Up'}
                                 </span>
-                                <ChevronRight size={20} className="group-hover:translate-x-1 transition-all" />
+                                <ChevronRight size={18} className="group-hover:translate-x-1 transition-all" />
                             </button>
                         </div>
                     </div>
 
-                    <div className="mt-12 pt-8 border-t border-white/5 text-center">
+                    <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 text-center">
                         <button
                             onClick={() => setIsLoginMode(!isLoginMode)}
-                            className="text-[10px] font-black text-slate-400 hover:text-blue-500 transition-all uppercase tracking-[0.4em] decoration-blue-500/50 underline-offset-8 decoration-2 hover:underline"
+                            className="text-[9px] sm:text-[10px] font-black text-slate-400 hover:text-blue-500 transition-all uppercase tracking-[0.3em] sm:tracking-[0.4em] decoration-blue-500/50 underline-offset-8 decoration-2 hover:underline"
                         >
                             {isLoginMode ? "Sign Up →" : "Login →"}
                         </button>
@@ -583,19 +620,19 @@ const App = () => {
 
                 <Navigation />
 
-                <main className="max-w-7xl mx-auto px-6 py-10">
-                    <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <main className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-10">
+                    <header className="mb-6 md:mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
-                            <h2 className="text-3xl font-black text-slate-900 tracking-tight">Active Portfolio</h2>
-                            <p className="text-slate-500 font-semibold flex items-center gap-2 mt-1">
+                            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight dark:text-white">Active Portfolio</h2>
+                            <p className="text-slate-500 font-semibold flex items-center gap-2 mt-1 text-sm md:text-base">
                                 High Growth Equities Strategy {dataLoading && <RefreshCw size={14} className="animate-spin text-blue-600" />}
                             </p>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <button onClick={updatePerformanceLabels} className="p-3 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
+                        <div className="flex items-center gap-3 w-full md:w-auto">
+                            <button onClick={updatePerformanceLabels} className="flex-1 md:flex-none p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 transition-all shadow-sm flex items-center justify-center">
                                 <RefreshCw size={20} />
                             </button>
-                            <button className="p-3 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
+                            <button className="flex-1 md:flex-none p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 transition-all shadow-sm flex items-center justify-center">
                                 <Bell size={20} />
                             </button>
                         </div>

@@ -70,16 +70,16 @@ const Dashboard = ({ totalPurchaseCost, currentMarketValue, totalProfitLoss, cur
             {/* Bento Grid Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Total Portfolio Value Card */}
-                <div className="lg:col-span-2 bg-slate-900 p-8 rounded-[40px] text-white shadow-2xl relative overflow-hidden group">
+                <div className="lg:col-span-2 bg-slate-900 p-6 md:p-8 rounded-[32px] md:rounded-[40px] text-white shadow-2xl relative overflow-hidden group">
                     <div className="relative z-10">
                         <span className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2 block">Total Portfolio Value</span>
-                        <h2 className="text-5xl font-black mb-4 tracking-tight">
+                        <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
                             ${currentMarketValue.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                         </h2>
-                        <div className={`flex items-center gap-2 font-bold text-lg ${totalProfitLoss >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                            {totalProfitLoss >= 0 ? <TrendingUp size={24} /> : <TrendingDown size={24} />}
+                        <div className={`flex items-center gap-2 font-bold text-base md:text-lg ${totalProfitLoss >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                            {totalProfitLoss >= 0 ? <TrendingUp size={20} className="md:w-6 md:h-6" /> : <TrendingDown size={20} className="md:w-6 md:h-6" />}
                             {totalProfitLoss >= 0 ? '+' : ''}${Math.abs(totalProfitLoss).toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                            <span className="opacity-50 text-sm ml-1">({(totalPurchaseCost > 0 ? (totalProfitLoss / totalPurchaseCost) * 100 : 0).toFixed(2)}%)</span>
+                            <span className="opacity-50 text-xs md:text-sm ml-1">({(totalPurchaseCost > 0 ? (totalProfitLoss / totalPurchaseCost) * 100 : 0).toFixed(2)}%)</span>
                         </div>
                     </div>
                     <Activity size={200} className="absolute -right-10 -bottom-10 text-blue-500 opacity-10 group-hover:scale-110 transition-all duration-700" />
@@ -123,21 +123,21 @@ const Dashboard = ({ totalPurchaseCost, currentMarketValue, totalProfitLoss, cur
             </div>
 
             {/* Performance Trend Chart */}
-            <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100">
-                <div className="flex justify-between items-center mb-10">
+            <div className="bg-white p-6 md:p-10 rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-100">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-10">
                     <div>
                         <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                             <Activity size={24} className="text-blue-600" /> Growth Trajectory
                         </h3>
                         <p className="text-sm text-slate-400 font-medium mt-1 uppercase tracking-widest">Aggregate Portfolio Valuation (7D)</p>
                     </div>
-                    <div className="flex bg-slate-50 p-1 rounded-xl">
+                    <div className="flex bg-slate-50 p-1 rounded-xl w-full sm:w-auto overflow-x-auto">
                         {['1D', '7D', '1M', '1Y', 'ALL'].map(t => (
-                            <button key={t} className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${t === '7D' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}>{t}</button>
+                            <button key={t} className={`flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg transition-all ${t === '7D' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}>{t}</button>
                         ))}
                     </div>
                 </div>
-                <div className="h-[350px] w-full">
+                <div className="h-[250px] md:h-[350px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={trendData}>
                             <defs>
@@ -163,17 +163,17 @@ const Dashboard = ({ totalPurchaseCost, currentMarketValue, totalProfitLoss, cur
 
             {/* Asset Composition Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white p-8 rounded-[40px] shadow-sm border border-slate-100">
+                <div className="bg-white p-6 md:p-8 rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-100">
                     <h3 className="text-lg font-bold text-slate-900 mb-8 flex items-center gap-3">
                         <PieIcon size={24} className="text-blue-500" /> Capital Allocation
                     </h3>
-                    <div className="h-[300px]">
+                    <div className="h-[250px] md:h-[300px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
                                 <Pie
                                     data={pieData}
-                                    innerRadius={70}
-                                    outerRadius={100}
+                                    innerRadius={60}
+                                    outerRadius={80}
                                     paddingAngle={8}
                                     dataKey="value"
                                     cornerRadius={8}
@@ -192,11 +192,11 @@ const Dashboard = ({ totalPurchaseCost, currentMarketValue, totalProfitLoss, cur
                     </div>
                 </div>
 
-                <div className="bg-white p-8 rounded-[40px] shadow-sm border border-slate-100">
+                <div className="bg-white p-6 md:p-8 rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-100">
                     <h3 className="text-lg font-bold text-slate-900 mb-8 flex items-center gap-3">
                         <BarChart3 size={24} className="text-emerald-500" /> Valuation Benchmarking
                     </h3>
-                    <div className="h-[300px]">
+                    <div className="h-[250px] md:h-[300px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={barData} barGap={12}>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />

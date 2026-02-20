@@ -30,17 +30,17 @@ const GlobalNews = () => {
     return (
         <div className="space-y-8 animate-fade-in">
             {/* Header / Search Area */}
-            <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-8">
-                <div className="space-y-2">
-                    <h2 className="text-4xl font-black text-slate-900 tracking-tight">Market Outlook</h2>
-                    <p className="text-slate-500 font-medium">Real-time global financial news and strategic analysis.</p>
+            <div className="bg-white p-6 md:p-10 rounded-[32px] md:rounded-[40px] shadow-sm border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+                <div className="space-y-2 text-center md:text-left">
+                    <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Market Outlook</h2>
+                    <p className="text-slate-500 font-medium text-sm md:text-base">Real-time global financial news and strategic analysis.</p>
                 </div>
                 <div className="relative w-full md:w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input
                         type="text"
                         placeholder="Search news, topics, companies..."
-                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-blue-600 transition-all font-semibold"
+                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 md:py-4 pl-12 pr-4 outline-none focus:ring-2 focus:ring-blue-600 transition-all font-semibold text-sm md:text-base"
                     />
                 </div>
             </div>
@@ -71,25 +71,25 @@ const GlobalNews = () => {
                         ))
                     ) : (
                         filteredNews.map(item => (
-                            <div key={item.id} className="bg-white p-8 rounded-[32px] border border-slate-100 hover:border-blue-200 transition-all group cursor-pointer relative overflow-hidden">
+                            <div key={item.id} className="bg-white p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-100 hover:border-blue-200 transition-all group cursor-pointer relative overflow-hidden">
                                 <div className="flex justify-between items-start mb-4 relative z-10">
-                                    <div className="flex items-center gap-2">
-                                        <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${item.impact === 'High' ? 'bg-red-50 text-red-600' : item.impact === 'Medium' ? 'bg-amber-50 text-amber-600' : 'bg-slate-50 text-slate-600'}`}>
-                                            {item.impact} Impact
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <span className={`px-2 md:px-3 py-1 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-widest ${item.impact === 'High' ? 'bg-red-50 text-red-600' : item.impact === 'Medium' ? 'bg-amber-50 text-amber-600' : 'bg-slate-50 text-slate-600'}`}>
+                                            {item.impact}
                                         </span>
-                                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg uppercase tracking-widest">
+                                        <span className="text-[9px] md:text-[10px] font-bold text-blue-600 bg-blue-50 px-2 md:px-3 py-1 rounded-lg uppercase tracking-widest">
                                             {item.category}
                                         </span>
                                     </div>
-                                    <div className="text-slate-400 font-bold text-[10px] flex items-center gap-1">
+                                    <div className="text-slate-400 font-bold text-[9px] md:text-[10px] flex items-center gap-1 whitespace-nowrap">
                                         <Clock size={12} /> {item.time}
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-all leading-tight mb-4 pr-10">
+                                <h3 className="text-lg md:text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-all leading-tight mb-4 pr-6 md:pr-10">
                                     {item.title}
                                 </h3>
                                 <div className="flex items-center justify-between relative z-10">
-                                    <span className="text-sm font-bold text-slate-400 italic">Source: {item.source}</span>
+                                    <span className="text-xs md:text-sm font-bold text-slate-400 italic">Source: {item.source}</span>
                                     <ExternalLink size={18} className="text-slate-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                                 </div>
                                 <div className="absolute right-[-20%] bottom-[-20%] opacity-[0.02] group-hover:opacity-[0.05] transition-all">
